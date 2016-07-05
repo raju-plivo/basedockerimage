@@ -1,0 +1,30 @@
+#!/bin/bash
+set -eo pipefail
+
+function do_err() {
+    code=$?
+    echo "Command failed with code $code: $BASH_COMMAND"
+    exit $code
+
+}
+trap do_err ERR
+
+echo "--> base-image script running..."
+
+source /scripts/base-image/variable.sh 
+
+## Configurating openssh-server
+
+bash /scripts/base-image/sshconfiguration.sh
+
+## Adding WME user
+
+bash /scripts/base-image/adduser.sh
+
+## Updating Time Zone
+
+bash /scripts/base-image/timezone.sh
+
+## cleaning up unecessary fils.
+
+bash /scripts/base-image/cleanup.sh

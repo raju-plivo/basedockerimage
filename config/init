@@ -1,0 +1,10 @@
+#!/bin/bash -e
+# This is the init script gets executed at container start. Every Dockerfile will append start scripts to it. 
+
+function do_err() {
+    code=$?
+    echo "Command failed with code $code: $BASH_COMMAND"
+    exit $code
+
+}
+trap do_err ERR
