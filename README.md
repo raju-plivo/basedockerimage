@@ -17,4 +17,4 @@ If you want to use custom username and password for ssh then send username and p
 
 If you want to use custom time-zone then send time_zone as environment variable (Detailt time zone will be "Etc/UTC").
 
-		docker run -d -p 22 -e "SSH_USER=baseimage" -e "SSH_PASSWORD=baseimage" -e "TIME_ZONE:-'Etc/UTC'" rajugupta15/basedockerimage
+		docker run -d -p 22 -e "SSH_USER=baseimage" -e "SSH_PASSWORD=baseimage" -e "TIME_ZONE:'Etc/UTC'" rajugupta15/basedockerimage
