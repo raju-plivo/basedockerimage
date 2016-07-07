@@ -10,8 +10,9 @@ function do_err() {
 trap do_err ERR
 
 ## Adding user for WME application.
-user="basedockerimage"
-if ! id -u $user > /dev/null 2>&1; then
+user="baseimage"
+user=${SSH_USER:-"basedockerimage"}
+if [ ! `id -u $user > /dev/null 2>&1`]; then
 	useradd -s /bin/bash -m -d /home/$user $user
 	cd /home/$user && mkdir .ssh && chmod 700 .ssh && chown -R $user:$user .ssh
 	sudo adduser $user sudo
@@ -22,8 +23,8 @@ fi
 
 ## Setting up ssh password for basedockerimage user
 #TODO: check the password value too or force set the password
-if ! grep -q '^${user}:' /etc/shadow; then
-	ssh_password=${SSH_BASEDOCKERIMAGE_PASSWORD:-"w@vem@keR"}
+if [ ! `grep -q '^${user}:' /etc/shadow` ]; then
+	ssh_password=${SSH_PASSWORD:-"baseimage"}
 	echo "--> configuring $user password ${ssh_password}..."
 	echo "$user:$ssh_password" | chpasswd
 else
