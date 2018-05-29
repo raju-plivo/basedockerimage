@@ -17,7 +17,7 @@ source /scripts/base-image/variable.sh
 
 bash /scripts/base-image/sshconfiguration.sh
 
-## Adding WME user
+## Adding base user
 
 bash /scripts/base-image/adduser.sh
 
